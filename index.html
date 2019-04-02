@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Web Metrics Guessing Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- TO DO Need to figure out ordering of stylesheets and script src's.-->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css">
+    <script src="assets/javascript/game.js"></script> -->
+</head>
+<body>
+           
+  <div class="jumbotron">
+    <h1 class="text-center">Web Metrics Guessing Game</h1>
+    <h3 class="text-center">Learn all about what user-centric metrics mean!</h3>
+  </div>
+
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="hint">
+                <h3>Hint Information</h3>
+                <hr>
+                <!-- <div id="answerImage"></div> -->
+                <h4 id="definition"></h4>
+                <h4 id="labOrField"></h4>
+                <h4 id="hint"></h4>
+                <br><br>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+      <!-- Buttons -->
+      <div class="col-lg-6">
+        <div class="card">
+          <h3 class="card-header">Guess</h3>
+        <div class="card-body">
+            <h1 id="guessed Letters"></h1>
+            <hr>
+        </div>
+          <div class="card-body">
+            <button id="button-A" onclick="checkGuess('a')" class="btn btn-primary number" value="A"><span>A</span></button>
+            <button id="button-B" class="btn btn-primary number" value="B"><span>B</span></button>
+            <button id="button-C" class="btn btn-primary number" value="C"><span>C</span></button>
+            <button id="button-D" class="btn btn-primary number" value="D"><span>D</span></button>
+            <button id="button-E" class="btn btn-primary number" value="E"><span>E</span></button>
+            <button id="button-F" class="btn btn-primary number" value="F"><span>F</span></button>
+            <button id="button-G" class="btn btn-primary number" value="G"><span>G</span></button>
+            <button id="button-H" class="btn btn-primary number" value="H"><span>H</span></button>
+            <br><br>
+            <button id="button-I" class="btn btn-primary number" value="I"><span>I</span></button>
+            <button id="button-J" class="btn btn-primary number" value="J"><span>J</span></button>
+            <button id="button-K" class="btn btn-primary number" value="K"><span>K</span></button>
+            <button id="button-L" class="btn btn-primary number" value="L"><span>L</span></button>
+            <button id="button-M" class="btn btn-primary number" value="M"><span>M</span></button>
+            <button id="button-N" class="btn btn-primary number" value="N"><span>N</span></button>
+            <button id="button-O" class="btn btn-primary number" value="O"><span>O</span></button>
+            <button id="button-P" class="btn btn-primary number" value="P"><span>P</span></button>
+            <br><br>
+            <button id="button-Q" class="btn btn-primary number" value="Q"><span>Q</span></button>
+            <button id="button-R" class="btn btn-primary number" value="R"><span>R</span></button>
+            <button id="button-S" class="btn btn-primary number" value="S"><span>S</span></button>
+            <button id="button-T" class="btn btn-primary number" value="T"><span>T</span></button>
+            <button id="button-U" class="btn btn-primary number" value="U"><span>U</span></button>
+            <button id="button-V" class="btn btn-primary number" value="V"><span>V</span></button>
+            <button id="button-W" class="btn btn-primary number" value="W"><span>W</span></button>
+            <button id="button-X" class="btn btn-primary number" value="X"><span>X</span></button>
+            <br><br>
+            <button id="button-Y" class="btn btn-primary number" value="Y"><span>Y</span></button>
+            <button id="button-Z" class="btn btn-primary number" value="Z"><span>Z</span></button>
+            <br><br>
+            <button id="button-hint" class="btn btn-dark clear" value="Hint"><span>Get Hint</span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guess Card -->
+      <div class="col-lg-6">
+        <div class="card">
+          <h3 class="card-header">Metric Name</h3>
+          <div class="card-body">
+            <h1 id="answerSpaces"></h1>
+            <hr>
+            <h1 id="alreadyGuessed">Already Guessed</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+    
+    // Global Variables
+   var userScore = 0;
+   var roundNumber = 6;
+   var numGuesses = 0;
+   var blankSpaces = [];
+   var answersIndex = 1;   
+   var charGuess ='';
+   var currentWord = 1;
+
+    // Words to Guess
+    var answers = [
+        {
+            word: "First Test Word",
+            definition: "First Test Definition",
+            labOrRUM: "First lab/field test", 
+            hint: "First Test Hint"
+        },
+        {
+            word: "Second Test Word",
+            definition: "Second Test Definition",
+            labOrRUM: "Second lab/field test", 
+            hint: "Second Test Hint"
+        }
+    ]
+
+    function initializeWord(answersIndex){
+        var metricNameLength = answers[answersIndex].word.length;
+        for (var j = 0; j < metricNameLength; j++) {
+                if (answers[answersIndex].word[j] === ' '){
+                    blankSpaces.push('    -    ');
+                }
+                else if (answers[answersIndex].word[j] != ' ') {
+                    blankSpaces.push('__');
+                }
+            console.log(answers[answersIndex].word[j]);
+            }
+        document.getElementById("answerSpaces").innerHTML = blankSpaces;
+        document.getElementById("definition").innerHTML = "Definition:  " + answers[answersIndex].definition;
+        document.getElementById("labOrField").innerHTML = "Lab or Field Metric:  " + answers[answersIndex].labOrRUM;
+        document.getElementById("hint").innerHTML = "Hint:  " + answers[answersIndex].hint;
+        //document.getElementById("answerImage").innerHTML = "<img src='/assets/images/cello.jpg' width='16' height='16'>"";
+    }
+
+    initializeWord(1);
+
+    function checkGuess(charGuess){
+           console.log(charGuess + "Howdy");
+           var metricNameLength = answers[answersIndex].word.length;
+           for (var j = 0; j < metricNameLength; j++) {
+                if (answers[answersIndex].word[j] === charGuess){
+                    blankSpaces.push(charGuess);
+                }
+                else if (answers[answersIndex].word[j] != charGuess) {
+                    blankSpaces.push('__');
+                }
+            console.log(answers[answersIndex].word[j]);
+            }
+     }
+
+     //for (var i=0; i<3; i++){
+        //Function to start with empty spaces and hint information for a new round / word.
+        
+        //Function to take the click of a button and see whether or not it is within the word.
+        for (var i=0; i<3; i++){
+            charGuess = onclick
+        checkGuess(charGuess);   
+        }
+     //}
+
+
+
+</script>
+
+
+</body>
+</html>
