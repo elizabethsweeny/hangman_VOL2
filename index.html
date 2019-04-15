@@ -9,11 +9,7 @@
     <!-- TO DO Need to figure out ordering of stylesheets and script src's.-->
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <!-- <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css">
-    <script src="assets/javascript/game.js"></script> -->
+   
 </head>
 <body>
            
@@ -97,82 +93,12 @@
     </div>
   </div>
 
-
-<script>
-    
-    // Global Variables
-   var userScore = 0;
-   var roundNumber = 6;
-   var numGuesses = 0;
-   var blankSpaces = [];
-   var answersIndex = 1;   
-   var charGuess ='';
-   var currentWord = 1;
-
-    // Words to Guess
-    var answers = [
-        {
-            word: "First Test Word",
-            definition: "First Test Definition",
-            labOrRUM: "First lab/field test", 
-            hint: "First Test Hint"
-        },
-        {
-            word: "Second Test Word",
-            definition: "Second Test Definition",
-            labOrRUM: "Second lab/field test", 
-            hint: "Second Test Hint"
-        }
-    ]
-
-    function initializeWord(answersIndex){
-        var metricNameLength = answers[answersIndex].word.length;
-        for (var j = 0; j < metricNameLength; j++) {
-                if (answers[answersIndex].word[j] === ' '){
-                    blankSpaces.push('    -    ');
-                }
-                else if (answers[answersIndex].word[j] != ' ') {
-                    blankSpaces.push('__');
-                }
-            console.log(answers[answersIndex].word[j]);
-            }
-        document.getElementById("answerSpaces").innerHTML = blankSpaces;
-        document.getElementById("definition").innerHTML = "Definition:  " + answers[answersIndex].definition;
-        document.getElementById("labOrField").innerHTML = "Lab or Field Metric:  " + answers[answersIndex].labOrRUM;
-        document.getElementById("hint").innerHTML = "Hint:  " + answers[answersIndex].hint;
-        //document.getElementById("answerImage").innerHTML = "<img src='/assets/images/cello.jpg' width='16' height='16'>"";
-    }
-
-    initializeWord(1);
-
-    function checkGuess(charGuess){
-           console.log(charGuess + "Howdy");
-           var metricNameLength = answers[answersIndex].word.length;
-           for (var j = 0; j < metricNameLength; j++) {
-                if (answers[answersIndex].word[j] === charGuess){
-                    blankSpaces.push(charGuess);
-                }
-                else if (answers[answersIndex].word[j] != charGuess) {
-                    blankSpaces.push('__');
-                }
-            console.log(answers[answersIndex].word[j]);
-            }
-     }
-
-     //for (var i=0; i<3; i++){
-        //Function to start with empty spaces and hint information for a new round / word.
-        
-        //Function to take the click of a button and see whether or not it is within the word.
-        for (var i=0; i<3; i++){
-            charGuess = onclick
-        checkGuess(charGuess);   
-        }
-     //}
-
-
-
-</script>
-
-
 </body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!-- <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css"> -->
+<script src="assets/javascript/game.js"></script>
+
 </html>
